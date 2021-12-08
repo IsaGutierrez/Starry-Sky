@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(201, 201, 201);
+}
+
+canvas {
+    border: 8px solid rgb(133, 77, 133);
+    border-radius: 10px;
+}
+
+button {
+    width: 150px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(133, 77, 133);
+    background-color: transparent;
+    font-size: 20px;
+    color: white
+    
+}
