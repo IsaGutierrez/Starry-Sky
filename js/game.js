@@ -8,10 +8,12 @@ class Game {
         this.rightStars = []
         this.leftStars = []
 
+        this.lives = 3
+
         this.starsFrameCount = 0
 
         this.intervalId = undefined
-        this.fps = 1000 / 60
+        this.fps = 1500 / 60
 
         this.score = 0;
     }
@@ -28,6 +30,7 @@ class Game {
                 this.clear();
                 this.draw();
                 this.move();
+                this.loseLives();
                 this.drawScore();
 
                 this.starsFrameCount++
@@ -41,10 +44,10 @@ class Game {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         this.staticStars = this.staticStars.filter(star => star.staticExists === true)
 
-        this.rightStars = this.rightStars.filter(star => star.xRight + star.width > 0)        
+        this.rightStars = this.rightStars.filter(star => star.xRight + star.width > -1)        
         this.rightStars = this.rightStars.filter(star => star.rightExists === true)
 
-        this.leftStars = this.leftStars.filter(star => star.xLeft + star.width > 0)
+        this.leftStars = this.leftStars.filter(star => star.xLeft + star.width < (this.ctx.canvas.width + 1))
         this.leftStars = this.leftStars.filter(star => star.leftExists === true)        
     }
 
@@ -90,12 +93,27 @@ class Game {
         })
     }
 
+    loseLives() {
+        this.rightStars.forEach(star => {
+            if(star.xRight + star.width < 0) {
+                this.lives--
+            }
+        })
+
+        this.leftStars.forEach(star => {
+            if(star.xLeft + star.width > this.ctx.canvas.width) {
+                this.lives--
+            }
+        })
+    }
+
     drawScore() {
         this.ctx.save()
 
         this.ctx.fillStyle = 'white'
         this.ctx.font = 'bold 24px sans-serif'
         this.ctx.fillText(`Score: ${this.score} points`, 80, 50) 
+        this.ctx.fillText(`Lives: ${this.lives}`, 80, 90)
 
         this.ctx.restore()
     }
