@@ -1,22 +1,89 @@
-body {
+
+
+.main {
+    display: flex;
+    width: auto;
+    margin: auto;
+    align-items: center;
+    /* justify-content: space-around; */
+    /* flex-direction: column; */
+    background-color: rgb(255, 255, 255);
+}
+
+.column {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    background-color: rgb(201, 201, 201);
+    flex-direction: column; 
+    width: 50%;   
+}
+
+div {
+    margin-top: 30px;
+    
 }
 
 canvas {
-    border: 8px solid rgb(133, 77, 133);
+    border: 6px solid #3f4a54;
     border-radius: 10px;
+    margin: 0px;
 }
 
 button {
-    width: 150px;
+    width: 80px;
     height: 40px;
+    /* margin-left: 20px; */
     margin-bottom: 20px;
-    border: 2px solid rgb(133, 77, 133);
-    background-color: transparent;
-    font-size: 20px;
-    color: white
-    
+    border-radius: 25px;
+    background-color: #3f4a54;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: white;
+    box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
+}
+
+button:hover {
+    background-color: #4d555e;
+    box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
+    color: #fff;
+    transform: translateY(5px);
+  }
+
+.settings {
+    width: 70px;
+    height: 70px;
+    margin-left: 0px;
+}
+
+.coin {
+    width: 40px;
+    height: 40px;
+}
+
+p {
+    margin-top: 0;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.bug {
+    width: 55px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

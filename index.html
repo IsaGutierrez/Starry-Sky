@@ -8,11 +8,43 @@
         <title>Starry Sky</title>
     </head>
     <body>
-        <button id="start-button">Start Game</button>
-        <div id="game-board">
-            <canvas id="my-canvas" width="1000" height="500"></canvas>            
+        <div class="main">
+            <div class="column">            
+                
+                <div>
+                    <img src="./images/coin.png" alt="Coin icon" class="coin"><p>1 point</p>
+                </div>
+
+                <div>
+                    <img src="./images/bunny.png" alt="Bunny icon"><p>2 points</p>
+                </div>
+
+                <div>
+                    <img src="./images/lunar-bug.png" alt="Lunar bug icon" class="bug"><p>3 points</p>
+                </div>
+            </div>
+
+            <div id="game-board">
+                <canvas id="my-canvas" width="950" height="500"></canvas>       
+            </div>
+            
+            <div class="column">
+                <button id="start-button">Start</button>
+                
+                <div class="dropdown">
+                    <img src="./images/settings.png" alt="Settings Icon" class="settings">
+                    <div class="dropdown-content">
+                        <button>Music: </button>
+                        <button>SFX: </button>
+                        <button>Background: </button>
+                    </div>
+                </div>    
+            </div>
         </div>
+        
+        
         <script type="text/javascript" src="js/background.js"></script>
+        <script type="text/javascript" src="js/hearts.js"></script>
         <script type="text/javascript" src="js/star-static.js"></script>
         <script type="text/javascript" src="js/star-right.js"></script>
         <script type="text/javascript" src="js/star-left.js"></script>

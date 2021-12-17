@@ -3,6 +3,7 @@ class Game {
         this.ctx = ctx
         
         this.background = new Background(ctx)
+        this.hearts = new Hearts(ctx)
 
         this.staticStars = []
         this.rightStars = []
@@ -11,18 +12,41 @@ class Game {
         this.lives = 3
 
         this.starsFrameCount = 0
-
+        this.starsFrames = 150
+        
         this.intervalId = undefined
-        this.fps = 1500 / 60
+        this.fps = 1000 / 60
 
         this.score = 0;
+
+        this.musicSound = new Audio('./sounds/background-music.mp3')
+        this.musicSound.loop = true
+        this.musicSound.volume = 0.3
+
+
+        this.coinSound = new Audio('./sounds/coin.wav')
+        this.coinSound.volume = 1
+        this.bunnySound = new Audio('./sounds/bunny2.ogg')
+        this.bunnySound.volume = 0.4
+        this.bugSound = new Audio('./sounds/bug.wav')
+        this.bugSound.volume = 0.3
+        this.hurtSound = new Audio('./sounds/hurt.ogg')
+        this.hurtSound.volume = 1
+        this.gameOverSound = new Audio('./sounds/gameOver.ogg')
+        this.gameOverSound.volume = 0.6
+        // this.coinSound = new Audio('./sounds/coin.wav')
+
     }
 
     start(){
         if(!this.intervalId){
+            this.musicSound.play()
+            this.musicSound.currentTime = 0
+            
+
             this.intervalId = setInterval(() => {
 
-                if (this.starsFrameCount % 120 === 0) {
+                if (this.starsFrameCount % this.starsFrames === 0) {
                     this.addStar()
                     this.starsFrameCount = 0
                 }
@@ -47,15 +71,34 @@ class Game {
         this.rightStars = this.rightStars.filter(star => star.xRight + star.width > -1)        
         this.rightStars = this.rightStars.filter(star => star.rightExists === true)
 
-        this.leftStars = this.leftStars.filter(star => star.xLeft + star.width < (this.ctx.canvas.width + 1))
+        this.leftStars = this.leftStars.filter(star => star.xLeft < (this.ctx.canvas.width + 1))
         this.leftStars = this.leftStars.filter(star => star.leftExists === true)        
     }
 
     draw() {
         this.background.draw()
+        
+        if (this.lives === 3) {
+            this.hearts.draw3();            
+        }
+
+        if (this.lives === 2) {
+            this.hearts.draw2();            
+        }
+
+        if (this.lives === 1) {
+            this.hearts.draw1();            
+        }
+
+        if (this.lives === 0) {
+            this.hearts.draw0();            
+        }
+
+        // this.hearts.drawCoin();
+
         this.staticStars.forEach(star => star.draw())
-        this.rightStars.forEach(star => star.draw())
-        this.leftStars.forEach(star => star.draw())
+        this.rightStars.forEach(star => star.draw())          
+        this.leftStars.forEach(star => star.draw())         
     }
 
     move() {
@@ -65,9 +108,17 @@ class Game {
     }
 
     addStar() {
-        this.staticStars.push(new Star_Static(this.ctx))
-        this.rightStars.push(new Star_Right(this.ctx))
-        this.leftStars.push(new Star_Left(this.ctx))
+        setTimeout(() => {
+            this.staticStars.push(new Star_Static(this.ctx))            
+        }, 200); 
+
+        setTimeout(() => {
+            this.rightStars.push(new Star_Right(this.ctx))
+        }, 20000); 
+
+        setTimeout(() => {
+            this.leftStars.push(new Star_Left(this.ctx))            
+        }, 45000); 
     }
 
     clickOnStar(x, y) {
@@ -75,20 +126,26 @@ class Game {
            const hasClickedOnStar = star.clickOnStar(x, y);
             if(hasClickedOnStar) {
                 this.score++;
+                this.coinSound.currentTime = 0
+                this.coinSound.play()
             }
         })
 
         this.rightStars.forEach(star => {
             const hasClickedOnStar = star.clickOnStar(x, y);
              if(hasClickedOnStar) {
-                 this.score++;
+                 this.score += 2;
+                 this.bunnySound.currentTime = 0
+                 this.bunnySound.play()
              }
         })
 
         this.leftStars.forEach(star => {
            const hasClickedOnStar = star.clickOnStar(x, y);
             if(hasClickedOnStar) {
-                this.score++;
+                this.score += 3;
+                this.bunnySound.currentTime = 0
+                this.bugSound.play()
             }
         })
     }
@@ -97,24 +154,70 @@ class Game {
         this.rightStars.forEach(star => {
             if(star.xRight + star.width < 0) {
                 this.lives--
+                this.hurtSound.currentTime = 0
+                this.hurtSound.play()
             }
         })
 
         this.leftStars.forEach(star => {
-            if(star.xLeft + star.width > this.ctx.canvas.width) {
+            if(star.xLeft > this.ctx.canvas.width) {
                 this.lives--
+                this.hurtSound.currentTime = 0
+                this.hurtSound.play()
             }
         })
+
+        if (this.lives === 0) {
+            this.gameOver()
+        }
+
+        if (this.staticStars.length >= 6) {
+            this.gameOver()
+        }
     }
 
     drawScore() {
         this.ctx.save()
 
         this.ctx.fillStyle = 'white'
-        this.ctx.font = 'bold 24px sans-serif'
-        this.ctx.fillText(`Score: ${this.score} points`, 80, 50) 
-        this.ctx.fillText(`Lives: ${this.lives}`, 80, 90)
+        this.ctx.font = 'bold 22px sans-serif'
+        this.ctx.shadowColor = 'black'
+        this.ctx.strokeStyle = 'black'
+        this.ctx.lineWidth = 2.5
+        this.ctx.shadowBlur = '6'
+
+        this.ctx.strokeText(`Score: ${this.score} points`, 50, 50) 
+        this.ctx.fillText(`Score: ${this.score} points`, 50, 50) 
+        // this.ctx.fillText(`Lives: ${this.lives}`, 80, 90)
+
+        
 
         this.ctx.restore()
+    }
+
+    gameOver() {
+        this.musicSound.pause();
+        this.gameOverSound.play();       
+
+
+        setTimeout(() => {
+            clearInterval(this.intervalId);
+        
+            this.ctx.save()
+        
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        
+        
+            this.ctx.fillStyle = 'white';
+            this.ctx.textAlign = 'center';
+            this.ctx.font = 'bold 24px sans-serif';
+            this.ctx.fillText(`Game Over`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 - 30);
+            this.ctx.fillStyle = 'white';
+            this.ctx.fillText(`Final score: ${this.score}`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 30);
+        
+            this.ctx.restore();
+        }, 300); 
+            
     }
 }

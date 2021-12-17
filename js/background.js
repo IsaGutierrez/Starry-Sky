@@ -8,7 +8,7 @@ class Background {
         this.height = this.ctx.canvas.height
 
         this.img = new Image()
-        this.img.src = "./images/starry-sky.png"
+        this.img.src = "./images/cloudy-sky-dark.png"
         this.img.isReady = false
         
         this.img.onload = () => {
