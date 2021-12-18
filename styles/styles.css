@@ -1,13 +1,30 @@
+body {
+    
+
+
+    /* background-color: white; */
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/cloudy-sky.png);
+    opacity: 0.5;
+    z-index: -1;
+} 
 
 
 .main {
     display: flex;
     width: auto;
-    margin: auto;
+    margin: 30px auto auto auto;
     align-items: center;
     /* justify-content: space-around; */
     /* flex-direction: column; */
-    background-color: rgb(255, 255, 255);
 }
 
 .column {
@@ -17,10 +34,7 @@
     width: 50%;   
 }
 
-div {
-    margin-top: 30px;
-    
-}
+
 
 canvas {
     border: 6px solid #3f4a54;
@@ -28,7 +42,7 @@ canvas {
     margin: 0px;
 }
 
-button {
+#start-button {
     width: 80px;
     height: 40px;
     /* margin-left: 20px; */
@@ -41,7 +55,7 @@ button {
     box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
 }
 
-button:hover {
+#start-button:hover {
     background-color: #4d555e;
     box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
     color: #fff;
@@ -49,9 +63,7 @@ button:hover {
   }
 
 .settings {
-    width: 70px;
-    height: 70px;
-    margin-left: 0px;
+    
 }
 
 .coin {
@@ -63,13 +75,18 @@ p {
     margin-top: 0;
     text-align: center;
     font-family: sans-serif;
+    color: #3f4a54;
 }
 
 .bug {
     width: 55px;
 }
 
-.dropdown {
+.iron {
+    width: 40px;
+}
+
+/* .dropdown {
     position: relative;
     display: inline-block;
 }
@@ -86,4 +103,49 @@ p {
 
 .dropdown:hover .dropdown-content {
     display: block;
+} */
+
+.dropbtn {
+    width: 70px;
+    height: 70px;
+    margin-left: 0px;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 0;
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+}
+  
+  /* Change color of dropdown links on hover */
+.dropdown-content button:hover {
+    background-color: #ddd;
+    border-radius: 10px;
+    text-align: center;
+    font-family: sans-serif;
+}
+  
+  /* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+  

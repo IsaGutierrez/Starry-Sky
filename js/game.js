@@ -8,11 +8,16 @@ class Game {
         this.staticStars = []
         this.rightStars = []
         this.leftStars = []
+        this.obstacles = []
+        this.oneup = []
 
         this.lives = 3
 
         this.starsFrameCount = 0
         this.starsFrames = 150
+
+        this.obstaclesFrameCount = 0
+        this.obstaclesFrames = 200
         
         this.intervalId = undefined
         this.fps = 1000 / 60
@@ -51,13 +56,23 @@ class Game {
                     this.starsFrameCount = 0
                 }
                 
+                if (this.obstacles.length <= 0 && this.score >= 70) { 
+                    this.addObstacle()
+                }
+
+                if (this.oneup.length <= 0 && this.score >= 10 && this.lives <= 2) {
+                    this.addOneup()
+                }
+
                 this.clear();
                 this.draw();
                 this.move();
                 this.loseLives();
                 this.drawScore();
+                this.increaseDifficulty();
 
                 this.starsFrameCount++
+                
 
             }, this.fps)
         }
@@ -73,6 +88,12 @@ class Game {
 
         this.leftStars = this.leftStars.filter(star => star.xLeft < (this.ctx.canvas.width + 1))
         this.leftStars = this.leftStars.filter(star => star.leftExists === true)        
+        
+        this.obstacles = this.obstacles.filter(obstacle => obstacle.x < (this.ctx.canvas.width + 1))
+        this.obstacles = this.obstacles.filter(obstacle => obstacle.exists === true)        
+
+        const now = new Date().getTime()
+        this.oneup = this.oneup.filter(oneup => now - oneup.date <= 6000)
     }
 
     draw() {
@@ -94,17 +115,39 @@ class Game {
             this.hearts.draw0();            
         }
 
-        // this.hearts.drawCoin();
-
         this.staticStars.forEach(star => star.draw())
         this.rightStars.forEach(star => star.draw())          
-        this.leftStars.forEach(star => star.draw())         
+        this.leftStars.forEach(star => star.draw())  
+        this.obstacles.forEach(obstacle => obstacle.draw())       
+    }
+
+    increaseDifficulty() {
+        if (this.score > 100) {
+            this.rightStars.forEach(bunny => {
+                bunny.vxRight = -2
+            }); 
+
+            this.leftStars.forEach(bug => {
+                bug.vxLeft = 3
+            });
+        }
+        
+        if (this.score > 150) {
+            this.rightStars.forEach(bunny => {
+                bunny.vxRight = -3.5
+            }); 
+
+            this.leftStars.forEach(bug => {
+                bug.vxLeft = 4
+            });
+        }
     }
 
     move() {
         this.staticStars.forEach(star => star.move())
         this.rightStars.forEach(star => star.move())
         this.leftStars.forEach(star => star.move())
+        this.obstacles.forEach(obstacle => obstacle.move())
     }
 
     addStar() {
@@ -114,11 +157,20 @@ class Game {
 
         setTimeout(() => {
             this.rightStars.push(new Star_Right(this.ctx))
-        }, 20000); 
+        }, 15000); 
 
         setTimeout(() => {
             this.leftStars.push(new Star_Left(this.ctx))            
-        }, 45000); 
+        }, 35000);   
+    }
+
+    addObstacle() {
+        this.obstacles.push(new Obstacle(this.ctx))
+    }
+
+    addOneup() {
+        const date = new Date().getTime()
+        this.oneup.push(new Oneup(this.ctx, date))
     }
 
     clickOnStar(x, y) {
@@ -144,8 +196,17 @@ class Game {
            const hasClickedOnStar = star.clickOnStar(x, y);
             if(hasClickedOnStar) {
                 this.score += 3;
-                this.bunnySound.currentTime = 0
+                this.bugSound.currentTime = 0
                 this.bugSound.play()
+            }
+        })
+        
+        this.obstacles.forEach(obstacle => {
+           const hasClickedOnObstacle = obstacle.clickOnObstacle(x, y);
+            if(hasClickedOnObstacle) {
+                this.lives--;
+                this.hurtSound.currentTime = 0
+                this.hurtSound.play()
             }
         })
     }
@@ -199,13 +260,12 @@ class Game {
         this.musicSound.pause();
         this.gameOverSound.play();       
 
-
         setTimeout(() => {
             clearInterval(this.intervalId);
         
             this.ctx.save()
         
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            this.ctx.fillStyle = 'rgba(0, 0, 0)';
             this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         
         

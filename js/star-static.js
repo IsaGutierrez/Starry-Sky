@@ -1,14 +1,16 @@
 class Star_Static {
     constructor(ctx) {
         this.ctx = ctx
+        
+        this.width = 30
+        this.height = 30
 
-        this.xStatic = Math.floor(Math.random() * this.ctx.canvas.width)
-        this.yStatic = Math.floor(Math.random() * (this.ctx.canvas.height - 50))
+        this.xStatic = Math.floor(Math.random() * ((this.ctx.canvas.width - this.width + 1) - 0) + 0)
+        this.yStatic = Math.floor(Math.random() * ((this.ctx.canvas.height - this.height + 1) - 0) + 0)
+        
 
         this.vxStatic = 5
 
-        this.width = 30
-        this.height = 30
 
         this.imgStatic = new Image()
         this.imgStatic.src = "./images/coin-sprite.png"

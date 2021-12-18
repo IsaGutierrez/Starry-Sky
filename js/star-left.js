@@ -1,14 +1,14 @@
 class Star_Left {
     constructor(ctx) {
         this.ctx = ctx
+        this.width = 40
+        this.height = 40
 
         this.xLeft = 0
-        this.yLeft = Math.floor(Math.random() * (this.ctx.canvas.height - 50))
+        this.yLeft = Math.floor(Math.random() * ((this.ctx.canvas.height - this.height + 1) - 0) + 0)
 
         this.vxLeft = 2
 
-        this.width = 40
-        this.height = 40
 
         this.imgLeft = new Image()
         this.imgLeft.src = "./images/bug-sprite.png"

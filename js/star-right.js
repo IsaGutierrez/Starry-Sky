@@ -1,14 +1,15 @@
 class Star_Right {
     constructor(ctx) {
         this.ctx = ctx
+        
+        this.width = 80
+        this.height = 80
 
         this.xRight = this.ctx.canvas.width
-        this.yRight = Math.floor(Math.random() * (this.ctx.canvas.height - 50))
+        this.yRight = Math.floor(Math.random() * ((this.ctx.canvas.height - this.height + 1) - 0) + 0)
 
         this.vxRight = -1
 
-        this.width = 80
-        this.height = 80
 
         this.imgRight = new Image()
         this.imgRight.src = "./images/bunny-right.png"
