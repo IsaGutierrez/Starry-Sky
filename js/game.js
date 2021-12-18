@@ -260,14 +260,15 @@ class Game {
         this.musicSound.pause();
         this.gameOverSound.play();       
 
+        clearInterval(this.intervalId);
         setTimeout(() => {
-            clearInterval(this.intervalId);
         
             this.ctx.save()
         
-            this.ctx.fillStyle = 'rgba(0, 0, 0)';
+            this.ctx.fillStyle = 'rgb(0, 0, 0)';
+            this.ctx.globalAlpha = 0.5;
             this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        
+            this.ctx.globalAlpha = 1;
         
             this.ctx.fillStyle = 'white';
             this.ctx.textAlign = 'center';
