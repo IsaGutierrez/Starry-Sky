@@ -10,9 +10,10 @@
     </head>
 
     <body id="game-page">
-        <div class="main">
-            <div class="column">            
-                
+        <div class="main-div"> 
+        
+        <!-- Left side of the canvas: points descriptions -->
+            <div class="canvas-sides"> 
                 <div>
                     <img src="./images/coin.png" alt="Coin icon" class="coin"><p>1 point</p>
                 </div>
@@ -29,14 +30,15 @@
                     <img src="./images/ironhack-logo.png" alt="Ironhack logo" class="iron"><p>-1 life</p>
                 </div>
             </div>
-
+        
+        <!-- Canvas -->
             <div id="game-board">
                 <canvas id="my-canvas" width="950" height="500"></canvas>       
             </div>
             
-            <div class="column">
-                <button id="start-button" class="start">Start</button>
-                <!-- <button id="restart-button" class="restart">Restart</button> -->
+        <!-- Right side of the canvas: settings and options -->
+            <div class="canvas-sides"> 
+                <button id="start-restart-btn" class="start">Start</button>
                 
                 <input id="instructions-btn" type="image" src="images/instructions.png">
 
@@ -49,7 +51,8 @@
                 </div>
 
             </div>
-            
+        
+        <!-- Modal div content -->
             <div id="modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -59,9 +62,7 @@
 
         </div>
 
-        
-        
-        
+    <!-- SCRIPTS -->
         <script type="text/javascript" src="js/background.js"></script>
         <script type="text/javascript" src="js/hearts.js"></script>
         <script type="text/javascript" src="js/oneup.js"></script>
@@ -71,5 +72,6 @@
         <script type="text/javascript" src="js/obstacle.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
+
     </body>
 </html>

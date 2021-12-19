@@ -4,7 +4,7 @@ window.onload = function() {
 
     const game = new Game(ctx)
 
-    const startButton = document.getElementById('start-button')
+    const startButton = document.getElementById('start-restart-btn')
     
     if (startButton.classList.contains("start")) {
         startButton.onclick = function() {

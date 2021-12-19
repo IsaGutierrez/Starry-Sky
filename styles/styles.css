@@ -1,159 +1,4 @@
-#game-page::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url(../images/sky-background.png);
-    background-size: cover;
-    opacity: 0.4;
-    z-index: -1;
-} 
-
-
-.main {
-    display: flex;
-    width: auto;
-    margin: 30px auto auto auto;
-    align-items: center;
-    /* justify-content: space-around; */
-    /* flex-direction: column; */
-}
-
-.column {
-    display: flex;
-    align-items: center;
-    flex-direction: column; 
-    width: 50%;
-}
-
-canvas {
-    border: 6px solid #3f4a54;
-    border-radius: 10px;
-    margin: 0px;
-    background-image: url(../images/cloudy-sky-dark-loading.png);
-    background-size: cover;
-}
-
-#start-button {
-    width: 100px;
-    height: 40px;
-    /* margin-left: 20px; */
-    margin-bottom: 20px;
-    border-radius: 25px;
-    background-color: #3f4a54;
-    font-size: 18px;
-    font-family: sans-serif;
-    color: white;
-    box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
-}
-
-#start-button:hover {
-    background-color: #4d555e;
-    box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
-    color: #fff;
-    transform: translateY(5px);
-    cursor: pointer;
-  }
-
-.settings {
-    
-}
-
-.coin {
-    width: 40px;
-    height: 40px;
-}
-
-p {
-    margin-top: 0;
-    text-align: center;
-    font-family: sans-serif;
-    color: #3f4a54;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.bug {
-    width: 55px;
-}
-
-.iron {
-    width: 40px;
-}
-
-/* .dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-} */
-
-.dropbtn {
-    width: 70px;
-    height: 70px;
-    margin-left: 0px;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown:hover {
-    cursor: pointer;
-}
-  
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-.dropdown-content button {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    border-radius: 10px;
-    border: 0;
-    display: block;
-    text-align: center;
-    font-family: sans-serif;
-}
-  
-  /* Change color of dropdown links on hover */
-.dropdown-content button:hover {
-    background-color: #ddd;
-    border-radius: 10px;
-    text-align: center;
-    font-family: sans-serif;
-    cursor: pointer;
-}
-  
-  /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-    cursor: pointer;
-}
-
+/* Loading screen style */
 .loading-screen-background {
     background-image: url(../images/sky-background.png);
     width: 100%;
@@ -163,7 +8,6 @@ p {
 .logo > img {
     width: 600px;
     margin-top: 30px;
-
 }
 
 .loading-screen {
@@ -202,50 +46,191 @@ p {
     color: #fff;
     transform: translateY(5px);
     cursor: pointer;
-  }
+}
 
-  h3 {
-      text-align: center;
-      font-family: sans-serif;
-      padding-bottom: 20px;
-  }
+h3 {
+    text-align: center;
+    font-family: sans-serif;
+    padding-bottom: 20px;
+}
 
-  #instructions-btn {
-      width: 50px;
-      height: 50px;
-      margin-left: 0px;
-  }
 
-  .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-  }
 
-  .modal-content {
-      background-color: #C6E0ED;
-      margin: 15% 20%;
-      border: 2px solid #C6E0ED;
-      border-radius: 10px;
-      padding: 20px; 
-  }
+/* Game screen */
 
-  .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-  }
+    /* Game screen background */
+#game-page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/sky-background.png);
+    background-size: cover;
+    opacity: 0.4;
+    z-index: -1;
+} 
 
-  .close:hover, .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-  }
+    /* Canvas and its two sides */
+.main-div {
+    display: flex;
+    width: 100%;
+    margin: 30px auto auto auto;
+    align-items: center;
+}
+
+.canvas-sides {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    width: 50%;
+}
+
+p {
+    margin-top: 0;
+    text-align: center;
+    font-family: sans-serif;
+    color: #3f4a54;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.coin {
+    width: 40px;
+    height: 40px;
+}
+
+.bug {
+    width: 55px;
+}
+
+.iron {
+    width: 40px;
+}
+
+canvas {
+    border: 6px solid #3f4a54;
+    border-radius: 10px;
+    margin: 0px;
+    background-image: url(../images/cloudy-sky-dark-loading.png);
+    background-size: cover;
+}
+
+    /* This changes from start to restart in JS */
+#start-restart-btn {
+    width: 100px;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    background-color: #3f4a54;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: white;
+    box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
+}
+
+    /* Changes button and cursor on hover */
+#start-restart-btn:hover {
+    background-color: #4d555e;
+    box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
+    color: #fff;
+    transform: translateY(5px);
+    cursor: pointer;
+}
+
+.dropbtn {
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+}
+  
+  /* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+    /* Changes cursor on hover */
+.dropdown:hover {
+    cursor: pointer;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1;
+}
+  
+  /* Options inside the dropdown */
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 0;
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+}
+  
+  /* Change color of dropdown options on hover */
+.dropdown-content button:hover {
+    background-color: #ddd;
+    border-radius: 10px;
+    text-align: center;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+  
+  /* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+}
+
+
+#instructions-btn {
+    width: 50px;
+    height: 50px;
+    margin-left: 0px;
+}
+
+    /* General settings for modal div */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #C6E0ED;
+    margin: 15% 20%;
+    border: 2px solid #C6E0ED;
+    border-radius: 10px;
+    padding: 20px; 
+}
+
+    /* X sign on the side to close the modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    /* X sign on hover */
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
