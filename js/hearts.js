@@ -7,7 +7,7 @@ class Hearts {
         this.width = 90
         this.height = 25
 
-
+    // Four images to show the number of remaining lives the player has.
         this.img3 = new Image()
         this.img3.src = "./images/hearts-3.png"
         this.img3.isReady = false
