@@ -259,26 +259,26 @@ class Game {
     gameOver() {
         this.musicSound.pause();
         this.gameOverSound.play();       
+        this.ctx.save()
+    
+        this.ctx.fillStyle = 'rgb(0, 0, 0)';
+        this.ctx.globalAlpha = 0.5;
+        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.globalAlpha = 1;
+    
+        this.ctx.fillStyle = 'white';
+        this.ctx.textAlign = 'center';
+        this.ctx.font = 'bold 24px sans-serif';
+        this.ctx.fillText(`Game Over`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 - 30);
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Final score: ${this.score}`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 30);
+    
+        this.ctx.restore();
 
-        clearInterval(this.intervalId);
         setTimeout(() => {
+            clearInterval(this.intervalId);
         
-            this.ctx.save()
-        
-            this.ctx.fillStyle = 'rgb(0, 0, 0)';
-            this.ctx.globalAlpha = 0.5;
-            this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-            this.ctx.globalAlpha = 1;
-        
-            this.ctx.fillStyle = 'white';
-            this.ctx.textAlign = 'center';
-            this.ctx.font = 'bold 24px sans-serif';
-            this.ctx.fillText(`Game Over`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 - 30);
-            this.ctx.fillStyle = 'white';
-            this.ctx.fillText(`Final score: ${this.score}`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 30);
-        
-            this.ctx.restore();
-        }, 300); 
+        }, 200); 
             
     }
 }

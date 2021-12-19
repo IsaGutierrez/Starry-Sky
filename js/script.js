@@ -4,10 +4,14 @@ window.onload = function() {
 
     const game = new Game(ctx)
 
+    
+
     document.getElementById('start-button').onclick = function() {
         game.start();
     }
 
+
+    
 
     function getCursorPosition(canvas, event) {
         const rect = canvas.getBoundingClientRect()
