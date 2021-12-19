@@ -47,7 +47,7 @@ window.onload = function() {
         const rect = canvas.getBoundingClientRect()
         const x = event.clientX - rect.left
         const y = event.clientY - rect.top
-        game.clickOnStar(x, y)
+        game.clickOnItem(x, y)
     }
     
     canvas.addEventListener('mousedown', function(event) {

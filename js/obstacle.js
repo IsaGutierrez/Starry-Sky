@@ -15,7 +15,7 @@ class Obstacle {
 
 
         this.img = new Image()
-        this.img.src = "./images/ironhack_logo.png"
+        this.img.src = "./images/ironhack-logo.png"
         this.img.isReady = false
 
         this.img.onload = () => {

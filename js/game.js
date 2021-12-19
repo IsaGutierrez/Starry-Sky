@@ -4,17 +4,19 @@ class Game {
         
         this.background = new Background(ctx)
         this.hearts = new Hearts(ctx)
-
-        this.staticStars = []
-        this.rightStars = []
-        this.leftStars = []
+    
+    // Arrays where the new items will be stored.
+        this.coins = []
+        this.bunnies = []
+        this.bugs = []
         this.obstacles = []
         this.oneup = []
 
+    // Player starts with 3 lives.
         this.lives = 3
 
-        this.starsFrameCount = 0
-        this.starsFrames = 150
+        this.itemsFrameCount = 0
+        this.itemsFrames = 150
 
         this.obstaclesFrameCount = 0
         this.obstaclesFrames = 200
@@ -24,12 +26,13 @@ class Game {
 
         this.score = 0;
 
+    // Background music
         this.musicSound = new Audio('./sounds/background-music.mp3')
         this.musicSound.loop = true
         this.musicSound.volume = 0.3
         this.musicSound.muted = false
-
-
+    
+    // SFX
         this.coinSound = new Audio('./sounds/coin.wav')
         this.coinSound.volume = 1
         this.bunnySound = new Audio('./sounds/bunny2.ogg')
@@ -40,7 +43,8 @@ class Game {
         this.hurtSound.volume = 1
         this.gameOverSound = new Audio('./sounds/gameOver.ogg')
         this.gameOverSound.volume = 0.6
-        
+    
+    // Added game over image here to avoid the need to create a new class.
         this.gameOverImg = new Image()
         this.gameOverImg.src = "./images/game-over.png"
 
@@ -52,9 +56,9 @@ class Game {
             this.musicSound.currentTime = 0        
 
             this.intervalId = setInterval(() => {
-                if (this.starsFrameCount % this.starsFrames === 0) {
-                    this.addStar()
-                    this.starsFrameCount = 0
+                if (this.itemsFrameCount % this.itemsFrames === 0) {
+                    this.addItem()
+                    this.itemsFrameCount = 0
                 }
                 
                 if (this.obstacles.length <= 0 && this.score >= 70) { 
@@ -63,7 +67,7 @@ class Game {
 
                 if (this.oneup.length <= 0 && this.score >= 10 && this.lives <= 2) {
                     this.addOneup()
-                }
+                } // NOT IMPLEMETED YET
 
                 this.clear();
                 this.draw();
@@ -72,26 +76,28 @@ class Game {
                 this.drawScore();
                 this.increaseDifficulty();
 
-                this.starsFrameCount++
+                this.itemsFrameCount++
             }, this.fps)
         }
     }
 
     clear(){
+    // Filter rules to clear items or obstacles that have been clickled on or have disappeared from screen.
+        
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.staticStars = this.staticStars.filter(star => star.staticExists === true)
+        this.coins = this.coins.filter(coin => coin.exists === true)
 
-        this.rightStars = this.rightStars.filter(star => star.xRight + star.width > -1)        
-        this.rightStars = this.rightStars.filter(star => star.rightExists === true)
+        this.bunnies = this.bunnies.filter(bunny => bunny.x + bunny.width > -1)        
+        this.bunnies = this.bunnies.filter(bunny => bunny.exists === true)
 
-        this.leftStars = this.leftStars.filter(star => star.xLeft < (this.ctx.canvas.width + 1))
-        this.leftStars = this.leftStars.filter(star => star.leftExists === true)        
+        this.bugs = this.bugs.filter(bug => bug.x < (this.ctx.canvas.width + 1))
+        this.bugs = this.bugs.filter(bug => bug.exists === true)        
         
         this.obstacles = this.obstacles.filter(obstacle => obstacle.x < (this.ctx.canvas.width + 1))
         this.obstacles = this.obstacles.filter(obstacle => obstacle.exists === true)        
 
         const now = new Date().getTime()
-        this.oneup = this.oneup.filter(oneup => now - oneup.date <= 6000)
+        this.oneup = this.oneup.filter(oneup => now - oneup.date <= 6000) // NOT IMPLEMENTED YET
     }
 
     draw() {
@@ -113,52 +119,56 @@ class Game {
             this.hearts.draw0();            
         }
 
-        this.staticStars.forEach(star => star.draw())
-        this.rightStars.forEach(star => star.draw())          
-        this.leftStars.forEach(star => star.draw())  
+        this.coins.forEach(coin => coin.draw())
+        this.bunnies.forEach(bunny => bunny.draw())          
+        this.bugs.forEach(bug => bug.draw())  
         this.obstacles.forEach(obstacle => obstacle.draw())       
     }
 
     increaseDifficulty() {
+    // This method increases difficulty by making items move progressively faster.
+
         if (this.score > 100) {
-            this.rightStars.forEach(bunny => {
-                bunny.vxRight = -2
+            this.bunnies.forEach(bunny => {
+                bunny.vx = -2
             }); 
 
-            this.leftStars.forEach(bug => {
-                bug.vxLeft = 3
+            this.bugs.forEach(bug => {
+                bug.vx = 3
             });
         }
         
         if (this.score > 150) {
-            this.rightStars.forEach(bunny => {
-                bunny.vxRight = -3.5
+            this.bunnies.forEach(bunny => {
+                bunny.vx = -3.5
             }); 
 
-            this.leftStars.forEach(bug => {
-                bug.vxLeft = 4
+            this.bugs.forEach(bug => {
+                bug.vx = 4
             });
         }
     }
 
     move() {
-        this.staticStars.forEach(star => star.move())
-        this.rightStars.forEach(star => star.move())
-        this.leftStars.forEach(star => star.move())
+        this.coins.forEach(coin => coin.move())
+        this.bunnies.forEach(bunny => bunny.move())
+        this.bugs.forEach(bug => bug.move())
         this.obstacles.forEach(obstacle => obstacle.move())
     }
 
-    addStar() {
+    addItem() {
+    // This method adds more items with time to progressively increase difficulty.
+        
         setTimeout(() => {
-            this.staticStars.push(new Star_Static(this.ctx))            
+            this.coins.push(new Coin(this.ctx))            
         }, 1500); 
 
         setTimeout(() => {
-            this.rightStars.push(new Star_Right(this.ctx))
+            this.bunnies.push(new Bunny(this.ctx))
         }, 20000); 
 
         setTimeout(() => {
-            this.leftStars.push(new Star_Left(this.ctx))            
+            this.bugs.push(new Bug(this.ctx))            
         }, 40000);   
     }
 
@@ -169,30 +179,32 @@ class Game {
     addOneup() {
         const date = new Date().getTime()
         this.oneup.push(new Oneup(this.ctx, date))
-    }
+    } // NOT IMPLEMENTED YET
 
-    clickOnStar(x, y) {
-        this.staticStars.forEach(star => {
-           const hasClickedOnStar = star.clickOnStar(x, y);
-            if(hasClickedOnStar) {
+    clickOnItem(x, y) {
+    // This method checks if player has clicked on coordinates where items/obstacles are located inside the canvas.
+
+        this.coins.forEach(coin => {
+           const hasClickedOnItem = coin.clickOnItem(x, y);
+            if(hasClickedOnItem) {
                 this.score++;
                 this.coinSound.currentTime = 0
                 this.coinSound.play()
             }
         })
 
-        this.rightStars.forEach(star => {
-            const hasClickedOnStar = star.clickOnStar(x, y);
-             if(hasClickedOnStar) {
+        this.bunnies.forEach(bunny => {
+            const hasClickedOnItem = bunny.clickOnItem(x, y);
+             if(hasClickedOnItem) {
                  this.score += 2;
                  this.bunnySound.currentTime = 0
                  this.bunnySound.play()
              }
         })
 
-        this.leftStars.forEach(star => {
-           const hasClickedOnStar = star.clickOnStar(x, y);
-            if(hasClickedOnStar) {
+        this.bugs.forEach(bug => {
+           const hasClickedOnItem = bug.clickOnItem(x, y);
+            if(hasClickedOnItem) {
                 this.score += 3;
                 this.bugSound.currentTime = 0
                 this.bugSound.play()
@@ -210,16 +222,16 @@ class Game {
     }
 
     loseLives() {
-        this.rightStars.forEach(star => {
-            if(star.xRight + star.width < 0) {
+        this.bunnies.forEach(bunny => {
+            if(bunny.x + bunny.width < 0) {
                 this.lives--
                 this.hurtSound.currentTime = 0
                 this.hurtSound.play()
             }
         })
 
-        this.leftStars.forEach(star => {
-            if(star.xLeft > this.ctx.canvas.width) {
+        this.bugs.forEach(bug => {
+            if(bug.x > this.ctx.canvas.width) {
                 this.lives--
                 this.hurtSound.currentTime = 0
                 this.hurtSound.play()
@@ -230,14 +242,14 @@ class Game {
             this.gameOver()
         }
 
-        if (this.staticStars.length >= 6) {
+        if (this.coins.length >= 6) {
             this.gameOver()
         }
     }
 
     drawScore() {
+    // Prints "point" (singular) if score is 1. Prints "points" (plural) for any other number.
 
-    // Print "point" in singular if score is 1. Print "points" (plural) for any other number.
         if (this.score === 1) {
             this.ctx.save()
 
@@ -296,14 +308,14 @@ class Game {
         this.ctx.fillText(
             `Final score: ${this.score}`,
             this.ctx.canvas.width / 2,
-            this.ctx.canvas.height / 2 + 70);
+            this.ctx.canvas.height / 2 + 70
+            );
     
         this.ctx.restore();
 
-    // Timeout to give the loseLives function to draw the "no hearts" image before showing GAME OVER screen.
+    // Timeout to give the loseLives function time to draw the "no hearts" image before showing the GAME OVER screen.
         setTimeout(() => {
             clearInterval(this.intervalId);
-        }, 200); 
-            
+        }, 200);      
     }
 }
