@@ -285,22 +285,22 @@ class Game {
     gameOver() {
         this.musicSound.pause();
         this.gameOverSound.play();       
-        this.ctx.save()
-
         
-        this.ctx.fillStyle = 'rgb(0, 0, 0)';
-        this.ctx.globalAlpha = 0.7;
-
-        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.ctx.globalAlpha = 1;
+        this.ctx.save();        
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        this.ctx.fillRect(
+            0,
+            0,
+            this.ctx.canvas.width,
+            this.ctx.canvas.height);
         
         this.ctx.drawImage(
             this.gameOverImg,
-            this.ctx.canvas.width / 2 - 200,
+            this.ctx.canvas.width / 2 - 280,
             this.ctx.canvas.height / 2 - 150,
-            400,
-            150
-        )
+            530,
+            215
+        );
 
         this.ctx.fillStyle = 'white';
         this.ctx.textAlign = 'center';
@@ -308,7 +308,7 @@ class Game {
         this.ctx.fillText(
             `Final score: ${this.score}`,
             this.ctx.canvas.width / 2,
-            this.ctx.canvas.height / 2 + 70
+            this.ctx.canvas.height / 2 + 100
             );
     
         this.ctx.restore();
