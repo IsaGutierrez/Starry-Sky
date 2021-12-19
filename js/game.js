@@ -35,7 +35,7 @@ class Game {
     // SFX
         this.coinSound = new Audio('./sounds/coin.wav')
         this.coinSound.volume = 1
-        this.bunnySound = new Audio('./sounds/bunny2.ogg')
+        this.bunnySound = new Audio('./sounds/bunny.ogg')
         this.bunnySound.volume = 0.4
         this.bugSound = new Audio('./sounds/bug.wav')
         this.bugSound.volume = 0.2
