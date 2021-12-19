@@ -27,6 +27,7 @@ class Game {
         this.musicSound = new Audio('./sounds/background-music.mp3')
         this.musicSound.loop = true
         this.musicSound.volume = 0.3
+        this.musicSound.muted = false
 
 
         this.coinSound = new Audio('./sounds/coin.wav')
@@ -34,23 +35,23 @@ class Game {
         this.bunnySound = new Audio('./sounds/bunny2.ogg')
         this.bunnySound.volume = 0.4
         this.bugSound = new Audio('./sounds/bug.wav')
-        this.bugSound.volume = 0.3
+        this.bugSound.volume = 0.2
         this.hurtSound = new Audio('./sounds/hurt.ogg')
         this.hurtSound.volume = 1
         this.gameOverSound = new Audio('./sounds/gameOver.ogg')
         this.gameOverSound.volume = 0.6
-        // this.coinSound = new Audio('./sounds/coin.wav')
+        
+        this.gameOverImg = new Image()
+        this.gameOverImg.src = "./images/game-over.png"
 
     }
 
-    start(){
-        if(!this.intervalId){
+    start(){    
+       if(!this.intervalId){
             this.musicSound.play()
-            this.musicSound.currentTime = 0
-            
+            this.musicSound.currentTime = 0        
 
             this.intervalId = setInterval(() => {
-
                 if (this.starsFrameCount % this.starsFrames === 0) {
                     this.addStar()
                     this.starsFrameCount = 0
@@ -72,11 +73,8 @@ class Game {
                 this.increaseDifficulty();
 
                 this.starsFrameCount++
-                
-
             }, this.fps)
         }
-
     }
 
     clear(){
@@ -153,15 +151,15 @@ class Game {
     addStar() {
         setTimeout(() => {
             this.staticStars.push(new Star_Static(this.ctx))            
-        }, 200); 
+        }, 1500); 
 
         setTimeout(() => {
             this.rightStars.push(new Star_Right(this.ctx))
-        }, 15000); 
+        }, 20000); 
 
         setTimeout(() => {
             this.leftStars.push(new Star_Left(this.ctx))            
-        }, 35000);   
+        }, 40000);   
     }
 
     addObstacle() {
@@ -238,46 +236,73 @@ class Game {
     }
 
     drawScore() {
-        this.ctx.save()
 
-        this.ctx.fillStyle = 'white'
-        this.ctx.font = 'bold 22px sans-serif'
-        this.ctx.shadowColor = 'black'
-        this.ctx.strokeStyle = 'black'
-        this.ctx.lineWidth = 2.5
-        this.ctx.shadowBlur = '6'
+    // Print "point" in singular if score is 1. Print "points" (plural) for any other number.
+        if (this.score === 1) {
+            this.ctx.save()
 
-        this.ctx.strokeText(`Score: ${this.score} points`, 50, 50) 
-        this.ctx.fillText(`Score: ${this.score} points`, 50, 50) 
-        // this.ctx.fillText(`Lives: ${this.lives}`, 80, 90)
+            this.ctx.fillStyle = 'white'
+            this.ctx.font = 'bold 22px sans-serif'
+            this.ctx.shadowColor = 'black'
+            this.ctx.strokeStyle = 'black'
+            this.ctx.lineWidth = 2.5
+            this.ctx.shadowBlur = '6'
 
+            this.ctx.strokeText(`Score: ${this.score} point`, 50, 50) 
+            this.ctx.fillText(`Score: ${this.score} point`, 50, 50) 
         
+            this.ctx.restore()
 
-        this.ctx.restore()
+        } else {
+            this.ctx.save()
+
+            this.ctx.fillStyle = 'white'
+            this.ctx.font = 'bold 22px sans-serif'
+            this.ctx.shadowColor = 'black'
+            this.ctx.strokeStyle = 'black'
+            this.ctx.lineWidth = 2.5
+            this.ctx.shadowBlur = '6'
+
+            this.ctx.strokeText(`Score: ${this.score} points`, 50, 50) 
+            this.ctx.fillText(`Score: ${this.score} points`, 50, 50) 
+        
+            this.ctx.restore()
+        }
     }
 
     gameOver() {
         this.musicSound.pause();
         this.gameOverSound.play();       
         this.ctx.save()
-    
+
+        
         this.ctx.fillStyle = 'rgb(0, 0, 0)';
-        this.ctx.globalAlpha = 0.5;
+        this.ctx.globalAlpha = 0.7;
+
         this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         this.ctx.globalAlpha = 1;
-    
+        
+        this.ctx.drawImage(
+            this.gameOverImg,
+            this.ctx.canvas.width / 2 - 200,
+            this.ctx.canvas.height / 2 - 150,
+            400,
+            150
+        )
+
         this.ctx.fillStyle = 'white';
         this.ctx.textAlign = 'center';
         this.ctx.font = 'bold 24px sans-serif';
-        this.ctx.fillText(`Game Over`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 - 30);
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillText(`Final score: ${this.score}`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 30);
+        this.ctx.fillText(
+            `Final score: ${this.score}`,
+            this.ctx.canvas.width / 2,
+            this.ctx.canvas.height / 2 + 70);
     
         this.ctx.restore();
 
+    // Timeout to give the loseLives function to draw the "no hearts" image before showing GAME OVER screen.
         setTimeout(() => {
             clearInterval(this.intervalId);
-        
         }, 200); 
             
     }

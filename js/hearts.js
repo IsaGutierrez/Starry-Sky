@@ -39,14 +39,6 @@ class Hearts {
         this.img0.onload = () => {
             this.img0.isReady = true
         }
-
-        // this.imgCoin = new Image()
-        // this.imgCoin.src = "./images/coin.png"
-        // this.imgCoin.isReady = false
-        
-        // this.imgCoin.onload = () => {
-        //     this.imgCoin.isReady = true
-        // }
     }
 
     draw3() {
@@ -96,16 +88,4 @@ class Hearts {
             )
         }
     }
-
-    // drawCoin() {
-    //     if (this.imgCoin.isReady) {
-    //         this.ctx.drawImage(
-    //             this.imgCoin,
-    //             40,
-    //             95,
-    //             40,
-    //             40
-    //         )
-    //     }
-    // }
 }

@@ -4,11 +4,41 @@ window.onload = function() {
 
     const game = new Game(ctx)
 
+    const startButton = document.getElementById('start-button')
+    
+    if (startButton.classList.contains("start")) {
+        startButton.onclick = function() {
+            game.start();
+            startButton.innerHTML = "Restart"
+            startButton.classList.remove("start")
+            startButton.classList.add("restart")
+        }
+
+    } if (startButton.classList.contains("restart")) {
+            startButton.onclick = function() {
+                window.location.reload()      
+        }
+    }
+
+    // const restartButton = document.getElementById("restart-button")
+
+    // restartButton.onclick = function() {
+    //     window.location.reload()
+    // }
+
+
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === 32) {
+            game.start()
+            startButton.innerHTML = "Restart"
+        }
+    })
+
+
+
     
 
-    document.getElementById('start-button').onclick = function() {
-        game.start();
-    }
+
 
 
     
@@ -28,13 +58,13 @@ window.onload = function() {
 
     musicButton.onclick = function() {
         if (musicButton.classList.contains("on")) {
-            game.musicSound.pause();
+            game.musicSound.volume = 0;
             musicButton.innerHTML = "Music: OFF";
             musicButton.classList.remove('on');
         }
 
         else {
-            game.musicSound.play();
+            game.musicSound.volume = 0.3;
             musicButton.innerHTML = "Music: ON";
             musicButton.classList.add('on');
         }
@@ -63,5 +93,25 @@ window.onload = function() {
             sfxButton.classList.add('on');
         }
     }
+
+    const modal = document.getElementById("modal");
+    const modalBtn = document.getElementById('instructions-btn');
+    const span = document.getElementsByClassName("close")[0];
+
+    modalBtn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none"
+        }
+    }
+
+
 
 }

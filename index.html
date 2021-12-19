@@ -34,7 +34,10 @@
             </div>
             
             <div class="column">
-                <button id="start-button">Restart</button>
+                <button id="start-button" class="start">Start</button>
+                <!-- <button id="restart-button" class="restart">Restart</button> -->
+                
+                <input id="instructions-btn" type="image" src="images/instructions.png">
                 
                 <div class="dropdown">
                     <img src="./images/settings.png" class="dropbtn">
@@ -43,9 +46,17 @@
                       <button id="sfx" class="on">SFX: ON</button>
                       <!-- <a href="#">Link 3</a> -->
                     </div>
-                  </div>
+                </div>
 
             </div>
+            
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Instructions</p>
+                </div>
+            </div>
+
         </div>
 
         
