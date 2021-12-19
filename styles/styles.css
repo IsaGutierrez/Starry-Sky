@@ -51,6 +51,7 @@ h3 {
     text-align: center;
     font-family: sans-serif;
     padding-bottom: 20px;
+    margin: 0;
 }
 
 
@@ -114,6 +115,10 @@ canvas {
     margin: 0px;
     background-image: url(../images/cloudy-sky-dark-loading.png);
     background-size: cover;
+}
+
+canvas:hover {
+    cursor: url(../images/cursor.png), auto;
 }
 
     /* This changes from start to restart in JS */
@@ -216,7 +221,6 @@ canvas {
     margin: 15% 20%;
     border: 2px solid #C6E0ED;
     border-radius: 10px;
-    padding: 20px; 
 }
 
     /* X sign on the side to close the modal */
@@ -225,6 +229,7 @@ canvas {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transform: translateX(-10px);
 }
 
     /* X sign on hover */
