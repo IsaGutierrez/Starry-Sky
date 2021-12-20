@@ -6,6 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="./styles/styles.css" />
         <link rel="icon" type="image/x-icon" href="./images/oneup.png">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@100&display=swap');
+            </style>
         <title>Starry Sky</title>
     </head>
 
@@ -38,7 +41,8 @@
             
         <!-- Right side of the canvas: settings and options -->
             <div class="canvas-sides"> 
-                <button id="start-restart-btn" class="start">Start</button>
+                <button id="start-btn" class="start">Start</button>
+                <button id="restart-btn" class="start hidden">Restart</button>
                 
                 <input id="instructions-btn" type="image" src="images/instructions.png">
 
@@ -58,7 +62,7 @@
                     <span class="close">&times;</span>
                         <div>
                             <h3>Instructions</h3>
-                            <p>Click on the objectives to earn points before they disappear from the screen.</p>
+                            <p>Click on the icons to earn points before they disappear from the screen.</p>
                             <p>If you don't click on them on time, you'll lose lives!</p>
                             <p>If there are 6 coins on screen, game over!</p>
                         </div>

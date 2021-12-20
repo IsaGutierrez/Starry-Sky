@@ -4,44 +4,27 @@ window.onload = function() {
 
     const game = new Game(ctx)
 
-    const startButton = document.getElementById('start-restart-btn')
+    const startButton = document.getElementById('start-btn')
+    const restartButton = document.getElementById('restart-btn')
     
-    if (startButton.classList.contains("start")) {
-        startButton.onclick = function() {
-            game.start();
-            startButton.innerHTML = "Restart"
-            startButton.classList.remove("start")
-            startButton.classList.add("restart")
-        }
-
-    } if (startButton.classList.contains("restart")) {
-            startButton.onclick = function() {
-                window.location.reload()      
-        }
+    
+    startButton.onclick = function() {
+        game.start();
+        startButton.classList.add("hidden")
+        restartButton.classList.remove("hidden")
     }
 
-    // const restartButton = document.getElementById("restart-button")
-
-    // restartButton.onclick = function() {
-    //     window.location.reload()
-    // }
-
+    
+    restartButton.onclick = function() {
+        window.location.reload()
+    }
 
     window.addEventListener('keydown', function(e) {
         if (e.keyCode === 32) {
             game.start()
             startButton.innerHTML = "Restart"
         }
-    })
-
-
-
-    
-
-
-
-
-    
+    })    
 
     function getCursorPosition(canvas, event) {
         const rect = canvas.getBoundingClientRect()

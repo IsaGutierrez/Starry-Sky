@@ -72,8 +72,8 @@ class Game {
                 this.clear();
                 this.draw();
                 this.move();
-                this.loseLives();
                 this.drawScore();
+                this.loseLives();
                 this.increaseDifficulty();
 
                 this.itemsFrameCount++

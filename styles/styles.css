@@ -7,20 +7,37 @@
 
 .logo > img {
     width: 600px;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .loading-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
 .instructions {
-    background-color: #E5F5F3;
-    border: 2px solid #C6E0ED;
-    border-radius: 10px;
-    padding: 20px;
+    background-color: white;
+    border: 7px solid #C6E0ED;
+    border-radius: 5px;
+    border-style: inset;
+    padding: 20px 50px;
+    box-shadow: 10px 5px 20px rgb(70, 70, 70);
+
+}
+
+.icons-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.icons-div > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .play {
@@ -30,15 +47,16 @@
 .play > button {
     width: 120px;
     height: 40px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     border-radius: 20px;
     background-color: #3f4a54;
     font-size: 18px;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
+    font-weight: bold;
     color: white;
-    box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
+    box-shadow: 4px 4px 10px rgb(70, 70, 70);
 }
-  
+
 .play > button:hover {
     background-color: #4d555e;
     box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
@@ -49,9 +67,31 @@
 
 h3 {
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
+    font-weight: bold;
     padding-bottom: 20px;
     margin: 0;
+    color: #419FD6;
+    font-size: 25px;
+}
+
+p {
+    margin-top: 0;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    color: #3f4a54;
+    font-size: 15px;
+}
+
+.red {
+    color: #B92D2D;
+    margin-top: 10px;
+}
+
+.green {
+    color: #75c195;
+    margin-top: 10px;
 }
 
 
@@ -72,12 +112,22 @@ h3 {
     z-index: -1;
 } 
 
+#game-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
     /* Canvas and its two sides */
 .main-div {
     display: flex;
     width: 100%;
-    margin: 30px auto auto auto;
+    margin: auto;
     align-items: center;
+    height: 100%;
 }
 
 .canvas-sides {
@@ -85,15 +135,6 @@ h3 {
     align-items: center;
     flex-direction: column; 
     width: 50%;
-}
-
-p {
-    margin-top: 0;
-    text-align: center;
-    font-family: sans-serif;
-    color: #3f4a54;
-    font-size: 15px;
-    font-weight: bold;
 }
 
 .coin {
@@ -122,25 +163,30 @@ canvas:hover {
 }
 
     /* This changes from start to restart in JS */
-#start-restart-btn {
+.start {
     width: 100px;
     height: 40px;
     margin-bottom: 20px;
     border-radius: 20px;
     background-color: #3f4a54;
     font-size: 18px;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
+    font-weight: bold;
     color: white;
     box-shadow: 4px 4px 4px rgba(138, 184, 214, 0.8);
 }
 
     /* Changes button and cursor on hover */
-#start-restart-btn:hover {
+.start:hover {
     background-color: #4d555e;
     box-shadow: 2px 2px 4px rgba(138, 184, 214, 0.8);
     color: #fff;
     transform: translateY(5px);
     cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }
 
 .dropbtn {
@@ -177,7 +223,8 @@ canvas:hover {
     border: 0;
     display: block;
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
+    font-weight: bold
 }
   
   /* Change color of dropdown options on hover */
@@ -185,7 +232,8 @@ canvas:hover {
     background-color: #ddd;
     border-radius: 10px;
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
+    font-weight: bold;
     cursor: pointer;
 }
   
