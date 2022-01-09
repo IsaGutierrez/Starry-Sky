@@ -6,7 +6,7 @@ You'll have to click on the objectives before they disappear from the screen, or
 
 <br>
 
-<a href="https://isagutierrez.github.io/Starry-Sky/">
+<a href="https://isagutierrez.github.io/Starry-Sky/" target="_blank">
     <img src="./images/readme-play.png" width="200px">
 </a>
 
