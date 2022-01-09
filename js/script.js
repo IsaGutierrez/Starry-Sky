@@ -41,15 +41,15 @@ window.onload = function() {
 
     musicButton.onclick = function() {
         if (musicButton.classList.contains("on")) {
-            game.musicSound.volume = 0;
-            musicButton.innerHTML = "Music: OFF";
-            musicButton.classList.remove('on');
+            game.musicSound.volume = 0
+            musicButton.innerHTML = "Music: OFF"
+            musicButton.classList.remove('on')
         }
 
         else {
             game.musicSound.volume = 0.3;
-            musicButton.innerHTML = "Music: ON";
-            musicButton.classList.add('on');
+            musicButton.innerHTML = "Music: ON"
+            musicButton.classList.add('on')
         }
     }
 
@@ -62,8 +62,8 @@ window.onload = function() {
             game.bugSound.volume = 0
             game.hurtSound.volume = 0
             game.gameOverSound.volume = 0
-            sfxButton.innerHTML = "SFX: OFF";
-            sfxButton.classList.remove('on');
+            sfxButton.innerHTML = "SFX: OFF"
+            sfxButton.classList.remove('on')
         }
 
         else {
@@ -72,21 +72,21 @@ window.onload = function() {
             game.bugSound.volume = 0.3
             game.hurtSound.volume = 1
             game.gameOverSound.volume = 0.6
-            sfxButton.innerHTML = "SFX: ON";
-            sfxButton.classList.add('on');
+            sfxButton.innerHTML = "SFX: ON"
+            sfxButton.classList.add('on')
         }
     }
 
-    const modal = document.getElementById("modal");
-    const modalBtn = document.getElementById('instructions-btn');
-    const span = document.getElementsByClassName("close")[0];
+    const modal = document.getElementById("modal")
+    const modalBtn = document.getElementById('instructions-btn')
+    const span = document.getElementsByClassName("close")[0]
 
     modalBtn.onclick = function() {
-        modal.style.display = "block";
+        modal.style.display = "block"
     }
 
     span.onclick = function() {
-        modal.style.display = "none";
+        modal.style.display = "none"
     }
 
     window.onclick = function(event) {
@@ -94,7 +94,4 @@ window.onload = function() {
             modal.style.display = "none"
         }
     }
-
-
-
 }

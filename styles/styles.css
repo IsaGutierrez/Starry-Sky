@@ -112,13 +112,22 @@ p {
     z-index: -1;
 } 
 
-#game-page {
+body {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+
+/* .loading-screen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    margin: 10px 0;
+    margin: 1%;
+} */
 
 
     /* Canvas and its two sides */

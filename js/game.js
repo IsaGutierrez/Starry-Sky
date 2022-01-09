@@ -17,9 +17,6 @@ class Game {
 
         this.itemsFrameCount = 0
         this.itemsFrames = 150
-
-        this.obstaclesFrameCount = 0
-        this.obstaclesFrames = 200
         
         this.intervalId = undefined
         this.fps = 1000 / 60
@@ -69,12 +66,12 @@ class Game {
                     this.addOneup()
                 } // NOT IMPLEMETED YET
 
-                this.clear();
-                this.draw();
-                this.move();
-                this.drawScore();
-                this.loseLives();
-                this.increaseDifficulty();
+                this.clear()
+                this.draw()
+                this.move()
+                this.drawScore()
+                this.loseLives()
+                this.increaseDifficulty()
 
                 this.itemsFrameCount++
             }, this.fps)
@@ -84,7 +81,7 @@ class Game {
     clear(){
     // Filter rules to clear items or obstacles that have been clickled on or have disappeared from screen.
         
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
         this.coins = this.coins.filter(coin => coin.exists === true)
 
         this.bunnies = this.bunnies.filter(bunny => bunny.x + bunny.width > -1)        
@@ -104,19 +101,19 @@ class Game {
         this.background.draw()
         
         if (this.lives === 3) {
-            this.hearts.draw3();            
+            this.hearts.draw3()          
         }
 
         if (this.lives === 2) {
-            this.hearts.draw2();            
+            this.hearts.draw2()          
         }
 
         if (this.lives === 1) {
-            this.hearts.draw1();            
+            this.hearts.draw1()            
         }
 
         if (this.lives === 0) {
-            this.hearts.draw0();            
+            this.hearts.draw0()            
         }
 
         this.coins.forEach(coin => coin.draw())
@@ -146,6 +143,8 @@ class Game {
             this.bugs.forEach(bug => {
                 bug.vx = 4
             });
+
+            this.itemsFrames = 150
         }
     }
 
@@ -185,7 +184,7 @@ class Game {
     // This method checks if player has clicked on coordinates where items/obstacles are located inside the canvas.
 
         this.coins.forEach(coin => {
-           const hasClickedOnItem = coin.clickOnItem(x, y);
+           const hasClickedOnItem = coin.clickOnItem(x, y)
             if(hasClickedOnItem) {
                 this.score++;
                 this.coinSound.currentTime = 0
@@ -194,7 +193,7 @@ class Game {
         })
 
         this.bunnies.forEach(bunny => {
-            const hasClickedOnItem = bunny.clickOnItem(x, y);
+            const hasClickedOnItem = bunny.clickOnItem(x, y)
              if(hasClickedOnItem) {
                  this.score += 2;
                  this.bunnySound.currentTime = 0
@@ -203,7 +202,7 @@ class Game {
         })
 
         this.bugs.forEach(bug => {
-           const hasClickedOnItem = bug.clickOnItem(x, y);
+           const hasClickedOnItem = bug.clickOnItem(x, y)
             if(hasClickedOnItem) {
                 this.score += 3;
                 this.bugSound.currentTime = 0
@@ -212,7 +211,7 @@ class Game {
         })
         
         this.obstacles.forEach(obstacle => {
-           const hasClickedOnObstacle = obstacle.clickOnObstacle(x, y);
+           const hasClickedOnObstacle = obstacle.clickOnObstacle(x, y)
             if(hasClickedOnObstacle) {
                 this.lives--;
                 this.hurtSound.currentTime = 0
@@ -283,16 +282,16 @@ class Game {
     }
 
     gameOver() {
-        this.musicSound.pause();
-        this.gameOverSound.play();       
+        this.musicSound.pause()
+        this.gameOverSound.play()
         
-        this.ctx.save();        
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        this.ctx.save()
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
         this.ctx.fillRect(
             0,
             0,
             this.ctx.canvas.width,
-            this.ctx.canvas.height);
+            this.ctx.canvas.height)
         
         this.ctx.drawImage(
             this.gameOverImg,
@@ -300,22 +299,22 @@ class Game {
             this.ctx.canvas.height / 2 - 150,
             530,
             215
-        );
+        )
 
-        this.ctx.fillStyle = 'white';
-        this.ctx.textAlign = 'center';
-        this.ctx.font = 'bold 24px sans-serif';
+        this.ctx.fillStyle = 'white'
+        this.ctx.textAlign = 'center'
+        this.ctx.font = 'bold 24px sans-serif'
         this.ctx.fillText(
             `Final score: ${this.score}`,
             this.ctx.canvas.width / 2,
             this.ctx.canvas.height / 2 + 100
-            );
+            )
     
-        this.ctx.restore();
+        this.ctx.restore()
 
     // Timeout to give the loseLives function time to draw the "no hearts" image before showing the GAME OVER screen.
         setTimeout(() => {
-            clearInterval(this.intervalId);
-        }, 200);      
+            clearInterval(this.intervalId)
+        }, 200)
     }
 }
