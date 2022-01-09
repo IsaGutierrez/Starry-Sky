@@ -1,4 +1,4 @@
-<img src="./images/logo.png" width="250px">
+<img src="./images/logo.png" width="300px">
 
 Starry Sky is a relaxed, cute point-and-click game where you'll have to collect coins, bunnies and lunar bugs to earn points.
 
@@ -7,7 +7,7 @@ You'll have to click on the objectives before they disappear from the screen, or
 <br>
 
 <a href="https://isagutierrez.github.io/Starry-Sky/" target="_blank">
-    <img src="./images/readme-play2.png" width="150px">
+    <img src="./images/readme-play2.png" width="200px">
 </a>
 
 
