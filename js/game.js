@@ -45,6 +45,10 @@ class Game {
         this.gameOverImg = new Image()
         this.gameOverImg.src = "./images/game-over.png"
 
+    // Added danger sign image here to avoid the need to create a new class.
+        this.dangerImg = new Image()
+        this.dangerImg.src = "./images/danger.png"
+
     }
 
     start(){    
@@ -175,10 +179,12 @@ class Game {
         this.obstacles.push(new Obstacle(this.ctx))
     }
 
+
     addOneup() {
+    // NOT IMPLEMENTED YET
         const date = new Date().getTime()
         this.oneup.push(new Oneup(this.ctx, date))
-    } // NOT IMPLEMENTED YET
+    } 
 
     clickOnItem(x, y) {
     // This method checks if player has clicked on coordinates where items/obstacles are located inside the canvas.
@@ -248,7 +254,7 @@ class Game {
 
     drawScore() {
     // Prints "point" (singular) if score is 1. Prints "points" (plural) for any other number.
-
+    
         if (this.score === 1) {
             this.ctx.save()
 
@@ -278,6 +284,29 @@ class Game {
             this.ctx.fillText(`Score: ${this.score} points`, 50, 50) 
         
             this.ctx.restore()
+        }
+
+        // Prints danger sign if there are 4+ coins on screen.
+        if (this.coins.length >= 4) {
+            this.ctx.save()
+
+            this.ctx.fillStyle = '#FFD42A'
+            this.ctx.font = 'bold 22px sans-serif'
+            this.ctx.shadowColor = 'black'
+            this.ctx.strokeStyle = 'black'
+            this.ctx.lineWidth = 2.5
+            this.ctx.shadowBlur = '6'
+
+            this.ctx.strokeText(`COINS`, 50, 120) 
+            this.ctx.fillText(`COINS`, 50, 120)
+
+            this.ctx.drawImage(
+                this.dangerImg,
+                125,
+                100,
+                25,
+                25
+            )
         }
     }
 
